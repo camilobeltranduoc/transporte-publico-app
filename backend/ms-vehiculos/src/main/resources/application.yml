@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ms-vehiculos
+
+  datasource:
+    url: ${ORACLE_URL:jdbc:oracle:thin:@(description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.sa-valparaiso-1.oraclecloud.com))(connect_data=(service_name=g974e60bdbca72a_transportedb_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))}
+    username: ${ORACLE_USERNAME:ADMIN}
+    password: ${ORACLE_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    com.transporte: INFO
+    org.hibernate.SQL: INFO
