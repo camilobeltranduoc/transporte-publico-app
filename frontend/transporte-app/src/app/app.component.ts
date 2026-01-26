@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { MsalService, MsalBroadcastService, MsalRedirectComponent } from '@azure/msal-angular';
-import { InteractionStatus } from '@azure/msal-browser';
+import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { MsalService, MsalBroadcastService, MsalModule } from '@azure/msal-angular';
+import { InteractionStatus, EventMessage, EventType } from '@azure/msal-browser';
 import { Subject, filter, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, MsalRedirectComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, MsalModule],
   template: `
     <div class="app-container">
       <nav class="navbar" *ngIf="isAuthenticated">
@@ -30,7 +30,6 @@ import { Subject, filter, takeUntil } from 'rxjs';
       <main class="main-content">
         <router-outlet></router-outlet>
       </main>
-      <app-redirect></app-redirect>
     </div>
   `,
   styles: [`
@@ -99,6 +98,7 @@ import { Subject, filter, takeUntil } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   private msalService = inject(MsalService);
   private msalBroadcastService = inject(MsalBroadcastService);
+  private router = inject(Router);
   private readonly destroying$ = new Subject<void>();
 
   isAuthenticated = false;
@@ -107,6 +107,15 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.msalService.handleRedirectObservable().subscribe();
 
+    this.msalBroadcastService.msalSubject$
+      .pipe(
+        filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
+        takeUntil(this.destroying$)
+      )
+      .subscribe(() => {
+        this.router.navigate(['/dashboard']);
+      });
+
     this.msalBroadcastService.inProgress$
       .pipe(
         filter((status: InteractionStatus) => status === InteractionStatus.None),
@@ -114,6 +123,9 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.setAuthenticationStatus();
+        if (this.isAuthenticated && this.router.url === '/') {
+          this.router.navigate(['/dashboard']);
+        }
       });
   }
 
