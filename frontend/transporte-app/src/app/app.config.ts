@@ -27,6 +27,8 @@ const tenantName = environment.azureAdB2C.tenantName;
 const clientId = environment.azureAdB2C.clientId;
 const policyName = environment.azureAdB2C.policyName;
 const scopeUri = environment.azureAdB2C.scopeUri;
+const redirectUri = environment.azureAdB2C.redirectUri;
+const apiUrl = environment.apiUrl;
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -34,8 +36,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
       clientId: clientId,
       authority: `https://${tenantName}.b2clogin.com/${tenantName}.onmicrosoft.com/${policyName}`,
       knownAuthorities: [`${tenantName}.b2clogin.com`],
-      redirectUri: 'http://localhost:4200/',
-      postLogoutRedirectUri: 'http://localhost:4200/',
+      redirectUri: redirectUri,
+      postLogoutRedirectUri: redirectUri,
       navigateToLoginRequestUrl: false
     },
     cache: {
@@ -48,7 +50,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
 
-  protectedResourceMap.set('http://localhost:8080/api', [scopeUri]);
+  protectedResourceMap.set(apiUrl, [scopeUri]);
 
   return {
     interactionType: InteractionType.Redirect,
