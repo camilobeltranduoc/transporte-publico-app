@@ -1,0 +1,58 @@
+# Oracle Wallet
+**/wallet/
+**/Wallet_*/
+*.jks
+*.p12
+*.sso
+cwallet.*
+ewallet.*
+tnsnames.ora
+sqlnet.ora
+ojdbc.properties
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+.classpath
+.project
+.settings/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+.npm/
+npm-debug.log*
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+*.env.local
+!.env.example
+
+# Build
+build/
+*.jar
+*.war
+*.class

@@ -1,0 +1,354 @@
+{
+  "info": {
+    "name": "TransporteGO API",
+    "description": "Coleccion de endpoints para el sistema de transporte publico",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Vehiculos",
+      "item": [
+        {
+          "name": "Listar Vehiculos",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/vehiculos"
+          }
+        },
+        {
+          "name": "Obtener Vehiculo por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/vehiculos/1"
+          }
+        },
+        {
+          "name": "Obtener Vehiculo por Patente",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/vehiculos/patente/AA1234"
+          }
+        },
+        {
+          "name": "Listar Vehiculos por Estado",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/vehiculos/estado/ACTIVO"
+          }
+        },
+        {
+          "name": "Crear Vehiculo",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/vehiculos",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patente\": \"AA1234\",\n  \"tipo\": \"BUS\",\n  \"marca\": \"Mercedes Benz\",\n  \"modelo\": \"O500\",\n  \"capacidad\": 45,\n  \"estado\": \"ACTIVO\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar Vehiculo",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/vehiculos/1",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patente\": \"AA1234\",\n  \"tipo\": \"BUS\",\n  \"marca\": \"Mercedes Benz\",\n  \"modelo\": \"O500 U\",\n  \"capacidad\": 50,\n  \"estado\": \"MANTENCION\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar Vehiculo",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/vehiculos/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ubicaciones",
+      "item": [
+        {
+          "name": "Listar Ubicaciones",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/ubicaciones"
+          }
+        },
+        {
+          "name": "Obtener Ubicaciones por Vehiculo",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/ubicaciones/vehiculo/1"
+          }
+        },
+        {
+          "name": "Obtener Ultima Ubicacion",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/ubicaciones/vehiculo/1/ultima"
+          }
+        },
+        {
+          "name": "Registrar Ubicacion",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/ubicaciones",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 1,\n  \"latitud\": -33.4489,\n  \"longitud\": -70.6693,\n  \"velocidad\": 35.5\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rutas",
+      "item": [
+        {
+          "name": "Listar Rutas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/rutas"
+          }
+        },
+        {
+          "name": "Obtener Ruta por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/rutas/1"
+          }
+        },
+        {
+          "name": "Obtener Ruta por Codigo",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/rutas/codigo/R001"
+          }
+        },
+        {
+          "name": "Listar Rutas Activas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/rutas/activas"
+          }
+        },
+        {
+          "name": "Buscar Rutas por Nombre",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/rutas/buscar?nombre=centro"
+          }
+        },
+        {
+          "name": "Crear Ruta",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/rutas",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"R001\",\n  \"nombre\": \"Ruta Centro - Estacion\",\n  \"descripcion\": \"Ruta principal hacia la estacion central\",\n  \"origen\": \"Plaza de Armas\",\n  \"destino\": \"Estacion Central\",\n  \"distanciaKm\": 5.5,\n  \"activa\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar Ruta",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/rutas/1",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"R001\",\n  \"nombre\": \"Ruta Centro - Estacion Central\",\n  \"descripcion\": \"Ruta principal actualizada\",\n  \"origen\": \"Plaza de Armas\",\n  \"destino\": \"Estacion Central\",\n  \"distanciaKm\": 6.0,\n  \"activa\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar Ruta",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/rutas/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Paradas",
+      "item": [
+        {
+          "name": "Listar Paradas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/paradas"
+          }
+        },
+        {
+          "name": "Obtener Paradas por Ruta",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/paradas/ruta/1"
+          }
+        },
+        {
+          "name": "Crear Parada",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/paradas",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Parada Plaza de Armas\",\n  \"direccion\": \"Av. Principal 123\",\n  \"rutaId\": 1,\n  \"latitud\": -33.4372,\n  \"longitud\": -70.6506,\n  \"orden\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar Parada",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/paradas/1",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Parada Plaza de Armas Norte\",\n  \"direccion\": \"Av. Principal 125\",\n  \"rutaId\": 1,\n  \"latitud\": -33.4372,\n  \"longitud\": -70.6506,\n  \"orden\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar Parada",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/paradas/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Horarios",
+      "item": [
+        {
+          "name": "Listar Horarios",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/horarios"
+          }
+        },
+        {
+          "name": "Obtener Horarios por Ruta",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/horarios/ruta/1"
+          }
+        },
+        {
+          "name": "Obtener Horarios por Ruta y Dia",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/horarios/ruta/1/dia/MONDAY"
+          }
+        },
+        {
+          "name": "Crear Horario",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/horarios",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rutaId\": 1,\n  \"diaSemana\": \"MONDAY\",\n  \"horaInicio\": \"06:00\",\n  \"horaFin\": \"22:00\",\n  \"frecuenciaMinutos\": 15,\n  \"activo\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar Horario",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/horarios/1",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rutaId\": 1,\n  \"diaSemana\": \"MONDAY\",\n  \"horaInicio\": \"05:30\",\n  \"horaFin\": \"23:00\",\n  \"frecuenciaMinutos\": 10,\n  \"activo\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar Horario",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/horarios/1"
+          }
+        }
+      ]
+    }
+  ]
+}
