@@ -21,6 +21,7 @@ export class VehiculoService {
   private apiUrl = `${environment.apiUrl}/vehiculos`;
 
   obtenerTodos(): Observable<Vehiculo[]> {
+    console.log('=== LLAMANDO API ===', this.apiUrl);
     return this.http.get<Vehiculo[]>(this.apiUrl);
   }
 

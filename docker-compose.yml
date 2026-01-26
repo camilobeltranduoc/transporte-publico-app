@@ -9,11 +9,11 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - ORACLE_HOST=${ORACLE_HOST}
-      - ORACLE_PORT=${ORACLE_PORT}
-      - ORACLE_SID=${ORACLE_SID}
-      - ORACLE_USER=${ORACLE_USER}
       - ORACLE_PASSWORD=${ORACLE_PASSWORD}
+      - ORACLE_WALLET_PATH=/wallet
+      - ORACLE_WALLET_PASSWORD=${ORACLE_WALLET_PASSWORD}
+    volumes:
+      - ./backend/wallet/Wallet_TRANSPORTEDB:/wallet:ro
     networks:
       - transporte-network
     restart: unless-stopped
@@ -26,11 +26,11 @@ services:
     ports:
       - "8082:8082"
     environment:
-      - ORACLE_HOST=${ORACLE_HOST}
-      - ORACLE_PORT=${ORACLE_PORT}
-      - ORACLE_SID=${ORACLE_SID}
-      - ORACLE_USER=${ORACLE_USER}
       - ORACLE_PASSWORD=${ORACLE_PASSWORD}
+      - ORACLE_WALLET_PATH=/wallet
+      - ORACLE_WALLET_PASSWORD=${ORACLE_WALLET_PASSWORD}
+    volumes:
+      - ./backend/wallet/Wallet_TRANSPORTEDB:/wallet:ro
     networks:
       - transporte-network
     restart: unless-stopped
@@ -43,8 +43,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - AUTH0_DOMAIN=${AUTH0_DOMAIN}
-      - AUTH0_AUDIENCE=${AUTH0_AUDIENCE}
+      - AZURE_AD_B2C_TENANT=TransporteDuoc
+      - AZURE_AD_B2C_POLICY=B2C_1_susi
       - MS_VEHICULOS_URL=http://ms-vehiculos:8081
       - MS_RUTAS_URL=http://ms-rutas:8082
     depends_on:

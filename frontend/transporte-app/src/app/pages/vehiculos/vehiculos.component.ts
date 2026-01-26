@@ -178,14 +178,16 @@ export class VehiculosComponent implements OnInit {
   }
 
   cargarVehiculos() {
+    console.log('=== INICIANDO CARGA DE VEHICULOS ===');
     this.cargando = true;
     this.vehiculoService.obtenerTodos().subscribe({
       next: (data) => {
+        console.log('=== VEHICULOS RECIBIDOS ===', data);
         this.vehiculos = data;
         this.cargando = false;
       },
       error: (err) => {
-        console.error('Error cargando vehiculos', err);
+        console.error('=== ERROR CARGANDO VEHICULOS ===', err);
         this.cargando = false;
       }
     });

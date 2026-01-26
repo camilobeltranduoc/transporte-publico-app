@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MsalService } from '@azure/msal-angular';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -56,6 +57,8 @@ export class HomeComponent {
   private authService = inject(MsalService);
 
   login() {
-    this.authService.loginRedirect();
+    this.authService.loginRedirect({
+      scopes: ['openid', 'profile', environment.azureAdB2C.scopeUri]
+    });
   }
 }

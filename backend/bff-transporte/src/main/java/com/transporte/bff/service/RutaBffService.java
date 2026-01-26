@@ -1,6 +1,5 @@
 package com.transporte.bff.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -9,11 +8,13 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class RutaBffService {
 
-    @Qualifier("rutasWebClient")
     private final WebClient webClient;
+
+    public RutaBffService(@Qualifier("rutasWebClient") WebClient webClient) {
+        this.webClient = webClient;
+    }
 
     public Mono<Object> obtenerTodas() {
         return webClient.get()

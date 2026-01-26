@@ -48,7 +48,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
 
-  protectedResourceMap.set('http://localhost:8080/api/*', [scopeUri]);
+  protectedResourceMap.set('http://localhost:8080/api', [scopeUri]);
 
   return {
     interactionType: InteractionType.Redirect,
@@ -60,7 +60,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   return {
     interactionType: InteractionType.Redirect,
     authRequest: {
-      scopes: [scopeUri]
+      scopes: ['openid', 'profile', scopeUri]
     }
   };
 }
