@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api-transporte-duoc-dcn.azure-api.net/v1/api',
+  apiUrl: 'https://0rdsv5zb6f.execute-api.us-east-1.amazonaws.com/api',
   azureAdB2C: {
     tenantName: 'TransporteDuoc',
     clientId: 'cd4c34a8-35fe-45bd-8e99-d286165a10d9',
