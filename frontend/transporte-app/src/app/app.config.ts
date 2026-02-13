@@ -34,7 +34,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
       clientId: clientId,
-      authority: `https://${tenantName}.b2clogin.com/${tenantName}.onmicrosoft.com/${policyName}`,
+      authority: `https://${tenantName}.b2clogin.com/tfp/${tenantName}.onmicrosoft.com/${policyName}`,
       knownAuthorities: [`${tenantName}.b2clogin.com`],
       redirectUri: redirectUri,
       postLogoutRedirectUri: redirectUri,
