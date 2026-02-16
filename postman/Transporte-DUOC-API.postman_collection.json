@@ -1,0 +1,448 @@
+{
+  "info": {
+    "name": "Transporte DUOC - API Collection",
+    "description": "Colección de APIs para el sistema de transporte público DUOC UC",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "openid profile https://TransporteDuoc.onmicrosoft.com/a1f68f5a-8087-4cbf-903f-c2be08caf6c3/demo.read",
+        "type": "string"
+      },
+      {
+        "key": "clientId",
+        "value": "cd4c34a8-35fe-45bd-8e99-d286165a10d9",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://TransporteDuoc.b2clogin.com/TransporteDuoc.onmicrosoft.com/B2C_1_susi/oauth2/v2.0/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://TransporteDuoc.b2clogin.com/TransporteDuoc.onmicrosoft.com/B2C_1_susi/oauth2/v2.0/authorize",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://oauth.pstmn.io/v1/callback",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      },
+      {
+        "key": "tokenName",
+        "value": "Azure AD B2C Token",
+        "type": "string"
+      },
+      {
+        "key": "addTokenTo",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-transporte-duoc-dcn.azure-api.net/v1/api",
+      "type": "string"
+    },
+    {
+      "key": "bffDirectUrl",
+      "value": "https://bff-transporte-susi-g9f9eqdug3djesdp.eastus2-01.azurewebsites.net/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Vehiculos",
+      "item": [
+        {
+          "name": "GET - Listar todos los vehiculos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vehiculos",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehiculos"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener vehiculo por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vehiculos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehiculos", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear vehiculo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patente\": \"ABCD-12\",\n  \"marca\": \"Mercedes-Benz\",\n  \"modelo\": \"Citaro\",\n  \"anio\": 2023,\n  \"capacidad\": 80,\n  \"tipo\": \"BUS\",\n  \"estado\": \"ACTIVO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vehiculos",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehiculos"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar vehiculo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patente\": \"ABCD-12\",\n  \"marca\": \"Mercedes-Benz\",\n  \"modelo\": \"Citaro K\",\n  \"anio\": 2024,\n  \"capacidad\": 85,\n  \"tipo\": \"BUS\",\n  \"estado\": \"ACTIVO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vehiculos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehiculos", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar vehiculo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vehiculos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehiculos", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rutas",
+      "item": [
+        {
+          "name": "GET - Listar todas las rutas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rutas",
+              "host": ["{{baseUrl}}"],
+              "path": ["rutas"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener ruta por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rutas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["rutas", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear ruta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"R001\",\n  \"nombre\": \"Ruta Centro - Norte\",\n  \"descripcion\": \"Conecta el centro con zona norte\",\n  \"origen\": \"Terminal Centro\",\n  \"destino\": \"Terminal Norte\",\n  \"distanciaKm\": 15.5,\n  \"tiempoEstimadoMin\": 45,\n  \"estado\": \"ACTIVA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rutas",
+              "host": ["{{baseUrl}}"],
+              "path": ["rutas"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar ruta",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"R001\",\n  \"nombre\": \"Ruta Centro - Norte Actualizada\",\n  \"descripcion\": \"Conecta el centro con zona norte\",\n  \"origen\": \"Terminal Centro\",\n  \"destino\": \"Terminal Norte\",\n  \"distanciaKm\": 16.0,\n  \"tiempoEstimadoMin\": 50,\n  \"estado\": \"ACTIVA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rutas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["rutas", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar ruta",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rutas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["rutas", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Horarios",
+      "item": [
+        {
+          "name": "GET - Listar todos los horarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/horarios",
+              "host": ["{{baseUrl}}"],
+              "path": ["horarios"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener horario por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/horarios/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["horarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear horario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rutaId\": 1,\n  \"horaSalida\": \"08:00\",\n  \"horaLlegada\": \"08:45\",\n  \"diasOperacion\": \"LUNES,MARTES,MIERCOLES,JUEVES,VIERNES\",\n  \"estado\": \"ACTIVO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/horarios",
+              "host": ["{{baseUrl}}"],
+              "path": ["horarios"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar horario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rutaId\": 1,\n  \"horaSalida\": \"08:30\",\n  \"horaLlegada\": \"09:15\",\n  \"diasOperacion\": \"LUNES,MARTES,MIERCOLES,JUEVES,VIERNES,SABADO\",\n  \"estado\": \"ACTIVO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/horarios/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["horarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar horario",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/horarios/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["horarios", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Paradas",
+      "item": [
+        {
+          "name": "GET - Listar todas las paradas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/paradas",
+              "host": ["{{baseUrl}}"],
+              "path": ["paradas"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener parada por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/paradas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["paradas", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear parada",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"P001\",\n  \"nombre\": \"Parada Plaza de Armas\",\n  \"direccion\": \"Av. Principal 123\",\n  \"latitud\": -33.4372,\n  \"longitud\": -70.6506,\n  \"estado\": \"ACTIVA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/paradas",
+              "host": ["{{baseUrl}}"],
+              "path": ["paradas"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar parada",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"P001\",\n  \"nombre\": \"Parada Plaza de Armas Actualizada\",\n  \"direccion\": \"Av. Principal 125\",\n  \"latitud\": -33.4372,\n  \"longitud\": -70.6506,\n  \"estado\": \"ACTIVA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/paradas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["paradas", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar parada",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/paradas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["paradas", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ubicaciones",
+      "item": [
+        {
+          "name": "GET - Listar todas las ubicaciones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/ubicaciones",
+              "host": ["{{baseUrl}}"],
+              "path": ["ubicaciones"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener ubicacion por vehiculo ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/ubicaciones/vehiculo/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["ubicaciones", "vehiculo", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Registrar ubicacion",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 1,\n  \"latitud\": -33.4500,\n  \"longitud\": -70.6600,\n  \"velocidad\": 35.5,\n  \"timestamp\": \"2024-01-15T10:30:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ubicaciones",
+              "host": ["{{baseUrl}}"],
+              "path": ["ubicaciones"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

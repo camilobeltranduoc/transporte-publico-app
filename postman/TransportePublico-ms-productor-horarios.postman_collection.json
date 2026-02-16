@@ -1,0 +1,38 @@
+{
+  "info": {
+    "_postman_id": "b2d32b58-9f77-4a15-8e8f-9fca0c0b5f7b",
+    "name": "Transporte Publico - ms-productor-horarios",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Enviar Horario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"idRuta\": \"R001\",\n  \"idParada\": \"P001\",\n  \"horaLlegada\": \"2026-01-26T12:05:00Z\",\n  \"estado\": \"ACTIVO\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8084/api/horarios",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8084",
+          "path": [
+            "api",
+            "horarios"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

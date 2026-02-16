@@ -1,0 +1,37 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: ms-consumidor-gps
+
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST:localhost}
+    port: ${SPRING_RABBITMQ_PORT:5672}
+    username: ${SPRING_RABBITMQ_USERNAME}
+    password: ${SPRING_RABBITMQ_PASSWORD}
+
+  datasource:
+    url: jdbc:oracle:thin:@${ORACLE_TNS_NAME:transportedb_high}
+    username: ${ORACLE_USER:ADMIN}
+    password: ${ORACLE_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+      data-source-properties:
+        oracle.net.tns_admin: ${ORACLE_WALLET_PATH:/wallet}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    com.transporte: INFO
+    org.hibernate.SQL: DEBUG
+

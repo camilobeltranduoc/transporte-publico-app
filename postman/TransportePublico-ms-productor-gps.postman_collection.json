@@ -1,0 +1,38 @@
+{
+  "info": {
+    "_postman_id": "7f02d2e0-0fd3-4a61-8d5a-5eb4f3a6a2c5",
+    "name": "Transporte Publico - ms-productor-gps",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Enviar GPS",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"idVehiculo\": 1,\n  \"latitud\": -33.4372,\n  \"longitud\": -70.6506,\n  \"timestamp\": \"2026-01-26T12:00:00Z\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/gps",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "gps"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
