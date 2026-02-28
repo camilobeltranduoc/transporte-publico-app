@@ -1,0 +1,44 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: ms-kafka-consumidor-horarios
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: consumidor-horarios-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.transporte.kafka.consumidor.horarios.dto.HorarioMessage
+
+  datasource:
+    url: jdbc:oracle:thin:@${ORACLE_TNS_NAME:transportedb_high}
+    username: ${ORACLE_USER:ADMIN}
+    password: ${ORACLE_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+      data-source-properties:
+        oracle.net.tns_admin: ${ORACLE_WALLET_PATH:/wallet}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+kafka:
+  topics:
+    horarios: horarios
+
+logging:
+  level:
+    com.transporte: INFO
